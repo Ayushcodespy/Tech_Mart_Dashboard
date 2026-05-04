@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --line: #e3e8f1;
+  --text: #1a2533;
+  --muted: #6a7484;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top right, #eef9df 0%, #f4f7fb 35%);
+  color: var(--text);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7d3e5;
+  border-radius: 999px;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.panel {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-soft;
+}
+
+.table-cell {
+  @apply px-4 py-3 text-sm text-slate-700;
+}
+
+.table-head {
+  @apply px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500;
+}

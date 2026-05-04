@@ -1,0 +1,17 @@
+.env
+*.log
+
+# Node
+node_modules
+build
+dist
+
+# Flutter
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool
+build
+
+# IDE
+.vscode
+.idea
