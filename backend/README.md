@@ -23,7 +23,7 @@ Copy-Item .env.example .env
 
 ```env
 GROCERY_DATABASE_URL=postgresql://postgres:1234@localhost:5432/grocery
-GROCERY_STORE_NAME=TechMart
+GROCERY_STORE_NAME=Green & Grains
 ```
 
 Change `GROCERY_STORE_NAME` to update the visible store name used by backend-rendered admin pages.

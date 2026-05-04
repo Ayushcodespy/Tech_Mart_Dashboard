@@ -42,7 +42,6 @@ export const settings = {
   host: env('HOST', '0.0.0.0'),
   storageRoot: path.resolve(env('STORAGE_ROOT', 'storage')),
   databaseSsl: parseBoolean(env('DATABASE_SSL', 'false')),
-  databaseSslCa: env('DATABASE_SSL_CA', ''),
   smtpHost: env('SMTP_HOST', ''),
   smtpPort: Number(env('SMTP_PORT', '587')),
   smtpUsername: env('SMTP_USERNAME', ''),
@@ -52,29 +51,6 @@ export const settings = {
   smtpUseTls: parseBoolean(env('SMTP_USE_TLS', 'true')),
   smtpUseSsl: parseBoolean(env('SMTP_USE_SSL', 'false')),
   passwordResetCodeExpireMinutes: Number(env('PASSWORD_RESET_CODE_EXPIRE_MINUTES', '15')),
-};
-
-export const buildSslConfig = (databaseUrl, databaseSsl, databaseSslCa) => {
-  if (databaseSslCa) {
-    return { rejectUnauthorized: true, ca: databaseSslCa };
-  }
-
-  try {
-    const url = new URL(databaseUrl);
-    const sslMode = url.searchParams.get('sslmode');
-    if (sslMode === 'require' || sslMode === 'prefer') {
-      url.searchParams.set('sslmode', 'no-verify');
-    }
-  } catch {
-    // ignore
-  }
-
-  const wantsSsl =
-    databaseSsl ||
-    /sslmode=(require|prefer|no-verify)/.test(databaseUrl) ||
-    /\.(render\.com|neon\.tech|aivencloud\.com|supabase\.com)/.test(databaseUrl);
-
-  return wantsSsl ? { rejectUnauthorized: false } : undefined;
 };
 
 export const normalizeDatabaseUrl = (databaseUrl) => {
