@@ -64,8 +64,8 @@ import {
 } from './api';
 import { appConfig } from './config';
 
-const HAS_LOGGED_IN_KEY = 'grocery_user_has_logged_in';
-const RECENT_SEARCHES_KEY = 'grocery_recent_searches';
+const HAS_LOGGED_IN_KEY = 'techmart_user_has_logged_in';
+const RECENT_SEARCHES_KEY = 'techmart_recent_searches';
 
 const tabs = [
   { name: 'home', label: 'Home', icon: 'Home' },
@@ -383,11 +383,11 @@ export default function App() {
       showToast('Session expired. Please login again.');
       resetTo({ name: 'home' });
     };
-    window.addEventListener('grocery-auth-expired', onExpired);
+    window.addEventListener('techmart-auth-expired', onExpired);
 
     return () => {
       alive = false;
-      window.removeEventListener('grocery-auth-expired', onExpired);
+      window.removeEventListener('techmart-auth-expired', onExpired);
       window.clearTimeout(noticeTimer.current);
     };
   }, [loadCatalog, resetTo, showToast]);
@@ -1182,7 +1182,7 @@ function ProductDetailPage({ addToCart, goBack, product, toggleWishlist, wishlis
         <h2>Description</h2>
         <p>
           {product.description?.trim() ||
-            'Fresh fruits and vegetables sourced for daily grocery needs.'}
+            'Premium products curated for your everyday tech and lifestyle needs.'}
         </p>
       </section>
       <div className="sticky-action">
@@ -1662,7 +1662,7 @@ function ProductCard({ compact = false, onAdd, onOpen, onWishlist, product, wish
       </button>
       <button className="product-copy" onClick={onOpen}>
         <strong>{product.name}</strong>
-        <span>{money(product.price_value)} / 1kg</span>
+        <span>{money(product.price_value)}</span>
       </button>
     </article>
   );

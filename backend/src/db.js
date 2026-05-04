@@ -1,6 +1,6 @@
 import pg from 'pg';
 
-import { normalizeDatabaseUrl, settings } from './config.js';
+import { buildSslConfig, normalizeDatabaseUrl, settings } from './config.js';
 
 const { Pool, types } = pg;
 
@@ -10,14 +10,11 @@ const connectionString = normalizeDatabaseUrl(settings.databaseUrl);
 const quoteIdentifier = (value) => `"${String(value).replaceAll('"', '""')}"`;
 const schemaName = settings.databaseSchema || 'public';
 const qualifiedName = (name) => `${quoteIdentifier(schemaName)}.${quoteIdentifier(name)}`;
-const wantsSsl =
-  settings.databaseSsl ||
-  connectionString.includes('sslmode=require') ||
-  /\.render\.com|\.neon\.tech|\.aivencloud\.com/.test(connectionString);
+const sslConfig = buildSslConfig(connectionString, settings.databaseSsl, settings.databaseSslCa);
 
 export const pool = new Pool({
   connectionString,
-  ssl: wantsSsl ? { rejectUnauthorized: false } : undefined,
+  ssl: sslConfig,
   options: `-c search_path=${schemaName}`,
 });
 

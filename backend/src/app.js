@@ -69,7 +69,11 @@ let setupPromise;
 
 export const prepareApp = () => {
   setupPromise ??= (async () => {
-    await fs.mkdir(settings.storageRoot, { recursive: true });
+    try {
+      await fs.mkdir(settings.storageRoot, { recursive: true });
+    } catch {
+      // Ignore storage errors on read-only filesystems (e.g., Vercel serverless)
+    }
     await initDatabase();
   })();
   return setupPromise;

@@ -4,8 +4,8 @@ const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/v1';
 const API_ORIGIN = new URL(API_BASE_URL).origin;
 
-export const ACCESS_TOKEN_KEY = 'grocery_user_access_token';
-export const REFRESH_TOKEN_KEY = 'grocery_user_refresh_token';
+export const ACCESS_TOKEN_KEY = 'techmart_user_access_token';
+export const REFRESH_TOKEN_KEY = 'techmart_user_refresh_token';
 
 export const getAccessToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
 export const getRefreshToken = () => localStorage.getItem(REFRESH_TOKEN_KEY);
@@ -51,7 +51,7 @@ api.interceptors.response.use(
         return api(original);
       } catch (refreshError) {
         clearTokens();
-        window.dispatchEvent(new Event('grocery-auth-expired'));
+        window.dispatchEvent(new Event('techmart-auth-expired'));
         return Promise.reject(refreshError);
       }
     }

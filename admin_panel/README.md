@@ -1,4 +1,4 @@
-# Green & Grains Admin Panel (React + Vite)
+# TechMart Admin Panel (React + Vite)
 
 ## Features
 - JWT-based admin login
